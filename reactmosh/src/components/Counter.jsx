@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 
 export class Counter extends Component {
   state = {
-    count: 0,
+    // value: this.props.counter.value,
     tags: ['tag1', 'tag2', 'tag3'],
     imgUrl: 'https://picsum.photos/200'
   }
   styles = {
-    fontSize: '30px',
+    fontSize: '50px',
     fontWeight: 'bold'
 
   }
@@ -18,19 +18,24 @@ export class Counter extends Component {
               </ul>
   }
   
-  handleIncrement = (e) => {
-    e.preventDefault();
-    this.setState({ count: this.state.count +1  });
-  }
+  // handleIncrement = (e) => {
+  //   e.preventDefault();
+  //   this.setState({ value: this.state.value +1  });
+  // }
+
   render() {
     return (
     <div>
       <img src={this.state.imgUrl} alt=""/> 
-       <span 
+      {/* {this.props.children} */}
+
+      <button onClick={() => this.props.onIncrement(this.props.counter)} className="btn btn-secondary btn-sm">Increment</button>
+      <button  className="btn btn-danger btn-sm m-2"
+      onClick={() => this.props.onDelete(this.props.counter.id)}>DELETE</button>
+      <span 
       className={this.getBadgeClasses()}>
       {this.formatCount()}
       </span>
-      <button onClick={this.handleIncrement} className="btn btn-secondary btn-sm">Increment</button>
       {this.state.tags.length === 0 && 'Please create a new tag'}
       {this.renderTags()}
 
@@ -39,14 +44,14 @@ export class Counter extends Component {
     );
   }
   formatCount = () => {
-    const {count} = this.state
+    const {value} = this.props.counter
     let x = <h2>Amber</h2>
-    return count === 0 ? 'Zero': count;
+    return value === 0 ? 'Zero': value;
   }
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += (this.state.count === 0) ? "warning" : "primary";
+    classes += (this.props.counter.value === 0) ? "warning" : "primary";
     return classes;
   }
 }
