@@ -4,17 +4,30 @@ export class Counter extends Component {
   state = {
     // value: this.props.counter.value,
     tags: ['tag1', 'tag2', 'tag3'],
-    imgUrl: 'https://picsum.photos/200'
+    imgUrl: 'https://picsum.photos/100'
   }
   styles = {
     fontSize: '50px',
     fontWeight: 'bold'
 
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log('prevpros')
+  //   if(prevProps.counter.value !== this.props.counter.value){
+  //     AJAX CALL and get new data from server
+  //   }
+  // }
+  /////////////!
+  // componentWillUnmount(){
+  //   console.log('unmount')
+  // }
+
+
   renderTags = () => {
   if(this.state.tags.length === 0) return <p>There are no tags</p>;
   return       <ul>
-  {this.state.tags.map(tag => <li key={tag}>{ tag }</li>)}
+  {this.state.tags.map(tag => <li key={tag} style={{listStyle:'none'}}>{ tag }</li>)}
               </ul>
   }
   
@@ -25,7 +38,7 @@ export class Counter extends Component {
 
   render() {
     return (
-    <div>
+    <div className="card" style={{boxShadow:"0 0 10px rgba(0, 0, 0, 0.5)", width:'50%', display:'inline-block', padding:'10px'}}>
       <img src={this.state.imgUrl} alt=""/> 
       {/* {this.props.children} */}
 
